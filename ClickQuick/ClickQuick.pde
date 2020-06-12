@@ -1,13 +1,11 @@
-import java.util.Map;
-
-int startTime = 0;
-int time = 0;
-int n = 1;
+float startTime = 0;
+float time = 0;
 float avg = 0.0;
 float tot = 0.0;
 float x = 0.0;
 float y = 0.0;
 float wh = 0.0;
+int n = 1;
 boolean started = false;
 
 void setup() {
@@ -31,13 +29,13 @@ void mousePressed() {
   // find the distance from the users click to the center of the
   // circle. If the distance from the click to the center is less
   // than the radius of the circle, the click is within the circle.
-  float dist = dist(mouseX, mouseY, x, y);
+  float distance = dist(mouseX, mouseY, x, y);
   
-  if (dist <= wh / 2) {
+  if (distance <= wh / 2) {
     calculateAvg(); // Calculate average click time
     
     startTime = millis(); // Refresh startTime
-    x = random(100, 400); // Generate new random x value
+    x = random(15, 485); // Generate new random x value
     y = random(100, 400); // Generate new random y value
     wh = random(15, 40);  // Generate new circle diameter
   } 
@@ -71,10 +69,9 @@ void title() {
 
 void timer() {
   time = millis() - startTime;
-  int timeSeconds = time / 1000;
-  int timeMillis = time % 1000;
+  float timeSeconds = time / 1000;
   textSize(14);
-  text("Time to click: " + timeSeconds + "." + nf(timeMillis, 3, 0), 75, 490);
+  text("Time to click: " + nf(timeSeconds, 0, 3), 75, 490);
 }
 
 void numClicks() {
@@ -89,8 +86,7 @@ void avgTime() {
 }
 
 void calculateAvg() {
-  float currTime = millis() - startTime;
-  float clickTime = currTime / 1000;
+  float clickTime = (millis() - startTime) / 1000;
   tot += clickTime;
   avg = tot / n;
   n++;
