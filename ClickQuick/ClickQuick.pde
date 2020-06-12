@@ -72,7 +72,7 @@ void timer() {
   float timeSeconds = time / 1000;
   textSize(14);
   text("Time to click: " + nf(timeSeconds, 0, 3), 75, 490);
-}
+} 
 
 void numClicks() {
   textSize(14);
